@@ -10,8 +10,8 @@ class KLCallbackVdImg(KLBasicNode):
     __version__ = '1.0.0'
     __logger__ = Log.get_logger(__name__)
 
-    RETURN_TYPES = ("STRING", "INT")
-    RETURN_NAMES = ("RESULT_TXT", "RESULT_CODE")
+    RETURN_TYPES = ("STRING", "INT", "STRING")
+    RETURN_NAMES = ("RESULT_TXT", "RESULT_CODE", "PROMPT ID")
     FUNCTION = "commit_result"
     CATEGORY = "KLNodes/WorkflowCallback"
 
@@ -36,23 +36,23 @@ class KLCallbackVdImg(KLBasicNode):
         :param prompt:
         :param extra_pnginfo:
         :param unique_id:
-        :return: (err_msg, err_code)
+        :return: (err_msg, err_code, prompt id)
         """
         if StringUtil.is_string_empty(callback_url):
             self.__logger__.error(u'callback url is empty, cannot commit generated result!')
-            return 'callback url is empty', 2
+            return 'callback url is empty', 2, ''
 
         if StringUtil.is_string_empty(video):
             self.__logger__.error('video path is empty, cannot commit generated result!')
-            return 'video path is empty', 2
+            return 'video path is empty', 2, ''
 
         if StringUtil.is_string_empty(image):
             self.__logger__.error('image path is empty, cannot commit generated result!')
-            return 'image path is empty', 2
+            return 'image path is empty', 2, ''
 
         if not FileUtil.check_file_exist(video):
             self.__logger__.error('video[{}] not exist, cannot commit generated result!'.format(video))
-            return 'video[{}] not exist, cannot commit generated result!'.format(video), 2
+            return 'video[{}] not exist, cannot commit generated result!'.format(video), 2, ''
 
         if not FileUtil.check_file_exist(image):
             self.__logger__.error('tail frame image[{}] not exist!'.format(image))
@@ -61,8 +61,8 @@ class KLCallbackVdImg(KLBasicNode):
         prompt_id = self.get_prompt_id(prompt=prompt, extra_pnginfo=extra_pnginfo, unique_id=unique_id)
         if StringUtil.is_string_empty(prompt_id):
             self.__logger__.error('prompt id is empty, cannot commit generated result!')
-            return 'prompt id is empty', 2
+            return 'prompt id is empty', 2, ''
 
         # TODO commit the video and the image
 
-        return 'succeed', 0
+        return 'succeed', 0, prompt_id
