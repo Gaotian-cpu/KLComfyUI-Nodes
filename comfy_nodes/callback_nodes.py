@@ -26,6 +26,12 @@ class KLCallbackVdImg(KLBasicNode):
         }
         return inputs
 
+    def __init__(self, *args, **kwargs):
+        super(KLCallbackVdImg, self).__init__(*args, **kwargs)
+
+        # Fixme
+        self.set_all_log(True)
+
     def commit_result(self, callback_url: str, video: str, image: str,
                       prompt=None, extra_pnginfo=None, unique_id=None) -> tuple:
         """
