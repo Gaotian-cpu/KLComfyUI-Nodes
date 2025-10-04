@@ -59,6 +59,7 @@ class KLCallbackVdImg(KLBasicNode):
             return 'image path is empty', 2, ''
 
         self.__logger__.info('prompt: {}'.format(prompt))
+        self.__logger__.info('unique id: {}'.format(unique_id))
 
         if StringUtil.is_string_empty(prompt):
             self.__logger__.error('prompt is empty, cannot commit generated result!')
