@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from klutils.klLog import Log
-from klutils.string_util import StringUtil
+from ..klutils.klLog import Log
+from ..klutils.string_util import StringUtil
 
 
 class KLCallbackVdImg:
