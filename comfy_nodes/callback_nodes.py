@@ -66,21 +66,18 @@ class KLCallbackVdImg(KLBasicNode):
             return 'image path is empty', 2, ''
 
         prompt_id = self.get_prompt_id_by_request()
-        self.__logger__.info('prompt: {}'.format(prompt))
+        # self.__logger__.info('prompt: {}'.format(prompt))
         self.__logger__.info('unique id: {}'.format(unique_id))
         self.__logger__.info('prompt_id: {}'.format(prompt_id))
-        self.__logger__.info('extra_pnginfo: {}'.format(extra_pnginfo))
+        # self.__logger__.info('extra_pnginfo: {}'.format(extra_pnginfo))
 
         if StringUtil.is_string_empty(prompt):
             self.__logger__.error('prompt is empty, cannot commit generated result!')
             return 'prompt id is empty', 2, ''
 
-        # 解析prompt id
-        prompt_id = None
-
         if not FileUtil.check_file_exist(video):
             self.__logger__.error('video[{}] not exist, cannot commit generated result!'.format(video))
-            return 'video[{}] not exist, cannot commit generated result!'.format(video), 2, ''
+            return 'video[{}] not exist, cannot commit generated result!'.format(video), 2, prompt_id
 
         if not FileUtil.check_file_exist(image):
             self.__logger__.error('tail frame image[{}] not exist!'.format(image))
