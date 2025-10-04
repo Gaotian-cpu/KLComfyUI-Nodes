@@ -10,6 +10,9 @@ class KLCallbackVdImg(KLBasicNode):
     __version__ = '1.0.0'
     __logger__ = Log.get_logger(__name__)
 
+    # 强制节点每次都运行
+    OUTPUT_NODE = True
+
     RETURN_TYPES = ("STRING", "INT", "STRING")
     RETURN_NAMES = ("RESULT_TXT", "RESULT_CODE", "PROMPT ID")
     FUNCTION = "commit_result"
