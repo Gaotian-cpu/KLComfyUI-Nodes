@@ -46,7 +46,7 @@ class KLBasicNode:
                 queue_running = response.json().get("queue_running")
                 if queue_running and len(queue_running) > 0 and len(queue_running[0]) > 1:
                     self.__logger__.info('queue-running: {}'.format(queue_running))
-                    self.__logger__.info('Response Content in queue_running: {}'.format(queue_running[0][1]))
+                    # self.__logger__.info('Response Content in queue_running: {}'.format(queue_running[0][1]))
                     return queue_running[0][1]
                 else:
                     return ''
