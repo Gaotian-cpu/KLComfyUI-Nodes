@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src.comfy_nodes.callback_nodes import KLCallbackVdImg
+from comfy_nodes.callback_nodes import KLCallbackVdImg
 
 NODE_CLASS_MAPPINGS = {
     "singleVideoImgCallback": KLCallbackVdImg
