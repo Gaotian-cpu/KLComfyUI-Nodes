@@ -11,7 +11,7 @@ class KLCallbackVdImg(KLBasicNode):
     __logger__ = Log.get_logger(__name__)
 
     # 强制节点每次都运行
-    OUTPUT_NODE = True
+    # OUTPUT_NODE = True
 
     RETURN_TYPES = ("STRING", "INT", "STRING")
     RETURN_NAMES = ("RESULT_TXT", "RESULT_CODE", "PROMPT ID")
@@ -24,7 +24,9 @@ class KLCallbackVdImg(KLBasicNode):
             "required": {
                 "callback_url": ("STRING", {}),
                 "video": ("STRING", {}),
-                'image': ("STRING", {})
+                'image': ("STRING", {}),
+                # 添加一个随机种子参数，以便每次都会运行本节点
+                "random_seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
 
             "hidden": {
