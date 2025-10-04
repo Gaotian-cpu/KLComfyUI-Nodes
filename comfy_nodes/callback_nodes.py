@@ -50,18 +50,18 @@ class KLCallbackVdImg(KLBasicNode):
             self.__logger__.error('image path is empty, cannot commit generated result!')
             return 'image path is empty', 2, ''
 
+        # get the prompt id
+        prompt_id = self.get_prompt_id(prompt=prompt, extra_pnginfo=extra_pnginfo, unique_id=unique_id)
+        if StringUtil.is_string_empty(prompt_id):
+            self.__logger__.error('prompt id is empty, cannot commit generated result!')
+            return 'prompt id is empty', 2, ''
+
         if not FileUtil.check_file_exist(video):
             self.__logger__.error('video[{}] not exist, cannot commit generated result!'.format(video))
             return 'video[{}] not exist, cannot commit generated result!'.format(video), 2, ''
 
         if not FileUtil.check_file_exist(image):
             self.__logger__.error('tail frame image[{}] not exist!'.format(image))
-
-        # get the prompt id
-        prompt_id = self.get_prompt_id(prompt=prompt, extra_pnginfo=extra_pnginfo, unique_id=unique_id)
-        if StringUtil.is_string_empty(prompt_id):
-            self.__logger__.error('prompt id is empty, cannot commit generated result!')
-            return 'prompt id is empty', 2, ''
 
         # TODO commit the video and the image
 
