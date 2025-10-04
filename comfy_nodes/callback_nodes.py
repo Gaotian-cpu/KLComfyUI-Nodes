@@ -30,9 +30,7 @@ class KLCallbackVdImg(KLBasicNode):
             },
 
             "hidden": {
-                "prompt": "PROMPT",
                 "unique_id": "UNIQUE_ID",
-                "prompt_id": "PROMPT_ID",  # 确保有这个
                 "extra_pnginfo": "EXTRA_PNGINFO",  # 添加这个
             },
         }
@@ -46,16 +44,14 @@ class KLCallbackVdImg(KLBasicNode):
         self.set_all_log(True)
 
     def commit_result(self, callback_url: str, video: str, image: str,
-                      prompt=None, unique_id=None, prompt_id=None, extra_pnginfo=None) -> tuple:
+                      extra_pnginfo=None, unique_id=None, *args, **kwargs) -> tuple:
         """
         回调
         :param callback_url: 回调地址
         :param video: 视频文件路径
         :param image: 图片文件路径
-        :param prompt:
-        :param unique_id:
-        :param prompt_id:
         :param extra_pnginfo:
+        :param unique_id:
         :return: (err_msg, err_code, prompt id)
         """
         if StringUtil.is_string_empty(callback_url):
