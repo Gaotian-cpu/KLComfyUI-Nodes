@@ -63,7 +63,7 @@ class PromptIdFetcher:
                     # self.__logger__.info('queue-running: {}'.format(queue_running))
                     # self.__logger__.info('Response Content in queue_running: {}'.format(queue_running[0][1]))
                     prompt_id = queue_running[0][1]
-                    self.__logger__.info(u'获取到prompt id: {}'.format(prompt_id))
+                    # self.__logger__.info(u'获取到prompt id: {}'.format(prompt_id))
                     return prompt_id
                 else:
                     return ''

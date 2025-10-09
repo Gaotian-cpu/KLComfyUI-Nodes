@@ -71,7 +71,7 @@ class KLCallbackVdImg(KLBasicNode):
             self.__logger__.error('prompt id is empty, cannot commit generated result!')
             return 'prompt id is empty', 2, ''
 
-        self.__logger__.info(u'本次prompt id：{}'.format(prompt_id))
+        # self.__logger__.info(u'本次prompt id：{}'.format(prompt_id))
 
         # 对于image和video，如果给过来的是list，那么就取第一个
         if isinstance(image, list) and len(image) > 0:
@@ -172,7 +172,7 @@ class KLCallbackVdImg(KLBasicNode):
 
         # 准备表单数据
         files_to_send = {
-            'img': (
+            'image': (
                 os.path.basename(tmp_pic_path),
                 open(tmp_pic_path, 'rb'),
                 'image/*'
@@ -197,7 +197,7 @@ class KLCallbackVdImg(KLBasicNode):
                         file_info[1].close()
 
                     # 重新打开文件
-                    files_to_send['img'] = (
+                    files_to_send['image'] = (
                         os.path.basename(tmp_pic_path),
                         open(tmp_pic_path, 'rb'),
                         'image/*'
