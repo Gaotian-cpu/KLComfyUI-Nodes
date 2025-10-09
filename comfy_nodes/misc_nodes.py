@@ -33,7 +33,7 @@ class PromptIdFetcher:
     def INPUT_TYPES(cls):
         inputs = {
             "required": {
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                # "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
                 # 添加一个基于时间的触发器
                 "force_refresh": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
@@ -49,7 +49,7 @@ class PromptIdFetcher:
         # 返回一个总是变化的值，确保节点每次都重新执行
         return float(time.time())
 
-    def get_prompt_id(self, seed: int, force_refresh: int = 0) -> tuple:
+    def get_prompt_id(self, force_refresh: int = 0) -> tuple:
         """
         获取工作流的prompt id
         :return:
