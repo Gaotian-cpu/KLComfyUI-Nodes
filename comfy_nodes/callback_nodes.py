@@ -35,7 +35,8 @@ class KLCallbackVdImg(KLBasicNode):
                 'image': ("STRING", {}),
                 'prompt_id': ("STRING", {}),
                 # 添加一个随机种子参数，以便每次都会运行本节点
-                "random_seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                # 去掉不要了
+                # "random_seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
 
             "hidden": {

@@ -30,7 +30,9 @@ class PromptIdFetcher:
             "required": {
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
-
+            "hidden": {
+                "control_after_generate": ("CONTROL_AFTER_GENERATE", {"default": "randomize"}),
+            },
         }
 
         return inputs
