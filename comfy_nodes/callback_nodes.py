@@ -67,6 +67,12 @@ class KLCallbackVdImg(KLBasicNode):
             self.__logger__.error(u'callback url is empty, cannot commit generated result!')
             return 'callback url is empty', 2, ''
 
+        # 对于image和video，如果给过来的是list，那么就取第一个
+        if isinstance(image, list) and len(image) > 0:
+            image = image[0]
+        if isinstance(video, list) and len(video) > 0:
+            video = video[0]
+
         if StringUtil.is_string_empty(video):
             self.__logger__.error('video path is empty, cannot commit generated result!')
             return 'video path is empty', 2, ''
