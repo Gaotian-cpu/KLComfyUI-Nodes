@@ -71,6 +71,8 @@ class KLCallbackVdImg(KLBasicNode):
             self.__logger__.error('prompt id is empty, cannot commit generated result!')
             return 'prompt id is empty', 2, ''
 
+        self.__logger__.info(u'本次prompt id：{}'.format(prompt_id))
+
         # 对于image和video，如果给过来的是list，那么就取第一个
         if isinstance(image, list) and len(image) > 0:
             image = image[0]

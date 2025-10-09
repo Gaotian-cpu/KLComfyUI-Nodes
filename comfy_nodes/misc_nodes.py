@@ -34,12 +34,12 @@ class PromptIdFetcher:
 
         return inputs
 
-    def get_prompt_id(self) -> str:
+    def get_prompt_id(self) -> tuple:
         """
         获取工作流的prompt id
         :return:
         """
-        return self.get_prompt_id_by_request()
+        return self.get_prompt_id_by_request(),
 
     def get_prompt_id_by_request(self) -> str:
         username, passwd = self.get_auth_info()
