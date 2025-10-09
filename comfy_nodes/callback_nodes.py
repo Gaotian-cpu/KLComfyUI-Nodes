@@ -181,7 +181,7 @@ class KLCallbackVdImg(KLBasicNode):
                 'video/*'
             )
         }
-        form_data = {'prompt_id': prompt_id}
+        form_data = {'promptId': prompt_id}
 
         last_error_code = ""
         last_error_msg = ""

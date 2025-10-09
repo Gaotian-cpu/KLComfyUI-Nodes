@@ -21,7 +21,7 @@ class PromptIdFetcher:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("PROMPT ID",)
     FUNCTION = "get_prompt_id"
-    CATEGORY = "KLNodes/PromptIDFetcher"
+    CATEGORY = "KLNodes/misc"
     OUTPUT_NODE = True  # 设置这个节点为输出节点，每次都会执行
 
     @classmethod
@@ -62,7 +62,9 @@ class PromptIdFetcher:
                 if queue_running and len(queue_running) > 0 and len(queue_running[0]) > 1:
                     # self.__logger__.info('queue-running: {}'.format(queue_running))
                     # self.__logger__.info('Response Content in queue_running: {}'.format(queue_running[0][1]))
-                    return queue_running[0][1]
+                    prompt_id = queue_running[0][1]
+                    self.__logger__.info(u'获取到prompt id: {}'.format(prompt_id))
+                    return prompt_id
                 else:
                     return ''
             else:
