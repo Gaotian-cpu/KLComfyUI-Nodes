@@ -28,7 +28,7 @@ class PromptIdFetcher:
     def INPUT_TYPES(cls):
         inputs = {
             "required": {
-                "seed": ("STRING", {'default': 'required and should be different each time!'}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
 
         }
