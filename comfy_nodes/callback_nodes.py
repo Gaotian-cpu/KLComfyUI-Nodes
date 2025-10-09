@@ -24,6 +24,7 @@ class KLCallbackVdImg(KLBasicNode):
     RETURN_NAMES = ("RESULT_TXT", "RESULT_CODE", "PROMPT ID")
     FUNCTION = "commit_result"
     CATEGORY = "KLNodes/WorkflowCallback"
+    OUTPUT_NODE = True  # 设置这个节点为输出节点，每次都会执行
 
     @classmethod
     def INPUT_TYPES(cls):
