@@ -4,6 +4,7 @@ import os
 import random
 import socket
 import sys
+import time
 
 import requests
 
@@ -33,15 +34,22 @@ class PromptIdFetcher:
         inputs = {
             "required": {
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                # 添加一个基于时间的触发器
+                "force_refresh": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
-            "hidden": {
-                "timestamp": ("INT", {"default": 0}),
-            },
+            # "hidden": {
+            #     "timestamp": ("INT", {"default": 0}),
+            # },
         }
 
         return inputs
 
-    def get_prompt_id(self, seed: int, timestamp: int = 0) -> tuple:
+    # 添加 IS_CHANGED 方法，确保节点每次都重新执行
+    def IS_CHANGED(self, force_refresh: int) -> float:
+        # 返回一个总是变化的值，确保节点每次都重新执行
+        return float(time.time())
+
+    def get_prompt_id(self, seed: int, force_refresh: int = 0) -> tuple:
         """
         获取工作流的prompt id
         :return:
