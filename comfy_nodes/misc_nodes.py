@@ -28,13 +28,14 @@ class PromptIdFetcher:
     def INPUT_TYPES(cls):
         inputs = {
             "required": {
+                "seed": ("STRING", {'default': 'required and should be different each time!'}),
             },
 
         }
 
         return inputs
 
-    def get_prompt_id(self) -> tuple:
+    def get_prompt_id(self, seed: str) -> tuple:
         """
         获取工作流的prompt id
         :return:
