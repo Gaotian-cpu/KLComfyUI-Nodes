@@ -72,6 +72,7 @@ class KLCallbackVdImg(KLBasicNode):
             return 'video path is empty', 2, ''
 
         if StringUtil.is_string_empty(image):
+            self.__logger__.info('image type: {}'.format(image))
             self.__logger__.error('image path is empty, cannot commit generated result!')
             return 'image path is empty', 2, ''
 
