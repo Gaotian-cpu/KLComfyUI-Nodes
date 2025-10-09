@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 import os
+import random
 import socket
 import sys
 
@@ -24,6 +25,9 @@ class PromptIdFetcher:
     CATEGORY = "KLNodes/misc"
     OUTPUT_NODE = True  # 设置这个节点为输出节点，每次都会执行
 
+    def __init__(self):
+        self.__random_value__ = random.randint(0, 0xffffffffffff)
+
     @classmethod
     def INPUT_TYPES(cls):
         inputs = {
@@ -31,13 +35,13 @@ class PromptIdFetcher:
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
             "hidden": {
-                "control_after_generate": ("CONTROL_AFTER_GENERATE", {"default": "randomize"}),
+                "timestamp": ("INT", {"default": 0}),
             },
         }
 
         return inputs
 
-    def get_prompt_id(self, seed: str) -> tuple:
+    def get_prompt_id(self, seed: int, timestamp: int = 0) -> tuple:
         """
         获取工作流的prompt id
         :return:
