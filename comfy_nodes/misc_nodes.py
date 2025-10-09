@@ -35,7 +35,7 @@ class PromptIdFetcher:
             "required": {
                 # "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
                 # 添加一个基于时间的触发器
-                "force_refresh": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                # "force_refresh": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
             # "hidden": {
             #     "timestamp": ("INT", {"default": 0}),
@@ -45,7 +45,7 @@ class PromptIdFetcher:
         return inputs
 
     # 添加 IS_CHANGED 方法，确保节点每次都重新执行
-    def IS_CHANGED(self, force_refresh: int) -> float:
+    def IS_CHANGED(self) -> float:
         # 返回一个总是变化的值，确保节点每次都重新执行
         return float(time.time())
 
