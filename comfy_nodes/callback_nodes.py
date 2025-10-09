@@ -19,8 +19,6 @@ class KLCallbackVdImg(KLBasicNode):
 
     # 强制节点每次都运行
     # OUTPUT_NODE = True
-    # 测试用回调接口
-    CALLBACK_FOR_TEST = 'http://43.128.250.245/comfy/callback/task'
 
     RETURN_TYPES = ("STRING", "INT", "STRING")
     RETURN_NAMES = ("RESULT_TXT", "RESULT_CODE", "PROMPT ID")
@@ -34,6 +32,7 @@ class KLCallbackVdImg(KLBasicNode):
                 "callback_url": ("STRING", {}),
                 "video": ("STRING", {}),
                 'image': ("STRING", {}),
+                'prompt_id': ("STRING", {}),
                 # 添加一个随机种子参数，以便每次都会运行本节点
                 "random_seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
@@ -50,15 +49,16 @@ class KLCallbackVdImg(KLBasicNode):
         super(KLCallbackVdImg, self).__init__(*args, **kwargs)
 
         # Fixme
-        self.set_all_log(True)
+        self.set_all_log(False)
 
-    def commit_result(self, callback_url: str, video: str, image: str,
+    def commit_result(self, callback_url: str, video: str, image: str, prompt_id: str,
                       extra_pnginfo=None, unique_id=None, *args, **kwargs) -> tuple:
         """
         回调
         :param callback_url: 回调地址
         :param video: 视频文件路径
         :param image: 图片文件路径
+        :param prompt_id:
         :param extra_pnginfo:
         :param unique_id:
         :return: (err_msg, err_code, prompt id)
@@ -66,6 +66,10 @@ class KLCallbackVdImg(KLBasicNode):
         if StringUtil.is_string_empty(callback_url):
             self.__logger__.error(u'callback url is empty, cannot commit generated result!')
             return 'callback url is empty', 2, ''
+
+        if StringUtil.is_string_empty(prompt_id):
+            self.__logger__.error('prompt id is empty, cannot commit generated result!')
+            return 'prompt id is empty', 2, ''
 
         # 对于image和video，如果给过来的是list，那么就取第一个
         if isinstance(image, list) and len(image) > 0:
@@ -81,16 +85,6 @@ class KLCallbackVdImg(KLBasicNode):
             self.__logger__.info('image type: {}'.format(image))
             self.__logger__.error('image path is empty, cannot commit generated result!')
             return 'image path is empty', 2, ''
-
-        prompt_id = self.get_prompt_id_by_request()
-        # self.__logger__.info('prompt: {}'.format(prompt))
-        # self.__logger__.info('unique id: {}'.format(unique_id))
-        # self.__logger__.info('prompt_id: {}'.format(prompt_id))
-        # self.__logger__.info('extra_pnginfo: {}'.format(extra_pnginfo))
-
-        if StringUtil.is_string_empty(prompt_id):
-            self.__logger__.error('prompt is empty, cannot commit generated result!')
-            return 'prompt id is empty', 2, ''
 
         if not FileUtil.check_file_exist(video):
             self.__logger__.error('video[{}] not exist, cannot commit generated result!'.format(video))
